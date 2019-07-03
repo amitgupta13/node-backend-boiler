@@ -22,9 +22,9 @@ const signup = async (req, res) => {
 
   const token = user.generateAuthToken();
 
-  res
-    .header("x-auth-token", token)
-    .send(_.pick(user, ["_id", "name", "email"]));
+  res.header("Access-Control-Allow-Origin", "*");
+
+  res.json({ profile: _.pick(user, ["_id", "name", "email"]), token });
 };
 
 const signin = async (req, res) => {
