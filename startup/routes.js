@@ -1,8 +1,10 @@
 const bodyParser = require("body-parser");
-const test = require("../routes/test");
+const cors = require("cors");
+const users = require("../routes/users");
 
 module.exports = app => {
+  app.use(cors());
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
-  app.use("/", test);
+  app.use("/auth", users);
 };
