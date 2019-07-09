@@ -41,7 +41,14 @@ const signin = async (req, res) => {
   res.send(token);
 };
 
+const profile = async (req, res) => {
+  const user = await User.findOne({ _id: req.user._id });
+  if (!user) return res.status(404).send("User Does not Exists");
+  return res.status(200).json(_.pick(user, ["_id", "name", "email"]));
+};
+
 module.exports = {
   signup,
-  signin
+  signin,
+  profile
 };
